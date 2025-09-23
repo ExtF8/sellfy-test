@@ -1,5 +1,5 @@
-import ProductServiceApi from './src/modules/services/ProductApiService';
-import ProductListView from './src/modules/views/ProductListView';
+import ProductServiceApi from './src/modules/services/ProductApiService.js';
+import ProductListView from './src/modules/views/ProductListView.js';
 
 // App controller
 class AppController {
@@ -60,4 +60,4 @@ class AppController {
 }
 
 // Init app
-new AppController().init;
+new AppController().init();
