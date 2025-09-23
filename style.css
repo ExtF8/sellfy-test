@@ -150,11 +150,11 @@ th:last-child {
     margin-bottom: 2px;
 }
 
-.desc {
+.description {
     color: var(--muted);
     font-size: 0.92rem;
     line-height: 1.4;
-    display: -webkit-box; /* clamp to 2 lines */
+    display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -266,12 +266,77 @@ th:last-child {
     box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent), white 70%);
 }
 
+/* Modal */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: #0008;
+    display: none;
+    place-items: center;
+    z-index: 50;
+}
+.modal-backdrop.open {
+    display: grid;
+}
+
+.modal {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    max-width: 520px;
+    width: 92%;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+.modal header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+}
+.modal header h3 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+.modal .body {
+    padding: 16px;
+}
+.modal .preview {
+    display: flex;
+    gap: 12px;
+}
+.modal .preview img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #0f141c;
+}
+.modal .preview .title {
+    font-weight: 700;
+}
+.modal .preview .modalDescription {
+    color: var(--muted);
+}
+.modal footer {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 12px 16px;
+    border-top: 1px solid var(--line);
+}
+.button.primary {
+    background: linear-gradient(135deg, var(--accent), #90cdf4);
+    border-color: transparent;
+}
+
 /* Responsive tweaks */
 @media (max-width: 720px) {
     th:nth-child(2),
     td:nth-child(2) {
     }
-    .desc {
+    .description {
         -webkit-line-clamp: 3;
         line-clamp: 3;
     }

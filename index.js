@@ -1,5 +1,6 @@
 import ProductServiceApi from './src/modules/services/ProductApiService.js';
 import ProductListView from './src/modules/views/ProductListView.js';
+import ShareModalView from './src/modules/views/ShareModalView.js';
 
 // App controller
 class AppController {
@@ -9,11 +10,11 @@ class AppController {
         const app = document.getElementById('app');
         this.productItems = new ProductServiceApi(API_URL);
         this.products = [];
-        (this.view = new ProductListView(app)),
-            {
-                onShare: product => this.shareProduct(product),
-                onDelete: product => this.deleteProduct(product.id),
-            };
+        this.modal = new ShareModalView();
+        this.view = new ProductListView(app, {
+            onShare: product => this.modal.open(product),
+            onDelete: product => this.deleteProduct(product.id),
+        });
     }
 
     // Initialize app
@@ -31,31 +32,6 @@ class AppController {
     deleteProduct(id) {
         this.products = this.products.filter(product => product.id !== id);
         this.view.render(this.products);
-    }
-
-    // Share product
-    async shareProduct(product) {
-        const url = product.url;
-        const text = `${product.name} - ${product.decription}`;
-
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: product.name,
-                    text,
-                    url,
-                });
-                return;
-            } catch (error) {
-                console.log('Error sharing product: ', error);
-            }
-        }
-        try {
-            await navigator.clipboard.writeText(url);
-            alert('Link copied');
-        } catch {
-            alert(url);
-        }
     }
 }
 

@@ -85,11 +85,11 @@ export default class ProductListView {
         name.className = 'name';
         name.textContent = product.name;
 
-        const desc = document.createElement('div');
-        desc.className = 'desc';
-        desc.textContent = product.description;
+        const description = document.createElement('div');
+        description.className = 'description';
+        description.textContent = product.description;
 
-        text.append(name, desc);
+        text.append(name, description);
         row.append(image, text);
         tableDataMain.appendChild(row);
 
