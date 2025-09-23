@@ -8,20 +8,20 @@ export default class ProductListView {
         this.root.innerHTML = `<div class="state"><div class="spinner"></div>Loading…</div>`;
     }
 
-    showError(message, onRetry) {
+    showError(errorMessage, onRetry) {
         this.root.innerHTML = '';
         const wrapper = document.createElement('div');
         wrapper.className = 'state';
 
-        const message = document.createElement('div');
-        message.textContent = `${message}`;
+        const messageElement = document.createElement('div');
+        messageElement.textContent = errorMessage;
 
         const retry = document.createElement('button');
         retry.className = 'button';
         retry.textContent = 'Try again';
         retry.addEventListener('click', onRetry);
 
-        wrapper.append(message, retry);
+        wrapper.append(messageElement, retry);
         this.root.appendChild(wrapper);
     }
 
@@ -55,7 +55,10 @@ export default class ProductListView {
             event => {
                 const open = this.root.querySelector('.dropdown.open');
                 if (!open) return;
-                if (!open.contains(e.target) && !open.previousElementSibling?.contains(event.target)) {
+                if (
+                    !open.contains(event.target) &&
+                    !open.previousElementSibling?.contains(event.target)
+                ) {
                     open.classList.remove('open');
                 }
             },
@@ -136,7 +139,9 @@ export default class ProductListView {
         dropDown.append(share, del);
         button.addEventListener('click', event => {
             event.stopPropagation();
-            this.root.querySelectorAll('.dropdown.open').forEach(element => element.classList.remove('open'));
+            this.root
+                .querySelectorAll('.dropdown.open')
+                .forEach(element => element.classList.remove('open'));
             dropDown.classList.toggle('open');
         });
 
@@ -144,6 +149,7 @@ export default class ProductListView {
         tableDataActions.appendChild(menu);
 
         tableRow.append(tableDataMain, tableDataCategory, tableDataPrice, tableDataActions);
+
         return tableRow;
     }
 }
