@@ -13,7 +13,10 @@ export class Product {
     formatPrice(locale) {
         const major = this.price / 100;
         try {
-            return new Intl.NumberFormat(locale, { style: 'currency', currency: this.currency });
+            return new Intl.NumberFormat(locale, {
+                style: 'currency',
+                currency: this.currency,
+            }).format(major);
         } catch {
             return `${major.toFixed(2)} ${this.currency}`;
         }
