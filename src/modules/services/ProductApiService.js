@@ -1,12 +1,13 @@
-import { Product } from '../entities/Product';
+import { Product } from '../entities/Product.js';
 
 export default class ProductServiceApi {
-    consturctor(endpoint) {
+    constructor(endpoint) {
         this.endpoint = endpoint;
     }
 
     async getAll() {
         const result = await fetch(this.endpoint);
+
         if (!result.ok) {
             throw new Error(`HTTP ${result.statusText}`);
         }
